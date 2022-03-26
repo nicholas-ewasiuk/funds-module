@@ -1,22 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
-import { Button, Col, Collapse, Row } from 'antd';
+import { Button, Col, Collapse, Row, Table } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
+import { BulbIcon } from './components/images/BulbIcon';
 
 export const Body: React.FC = () => {
   const { Panel } = Collapse;
 
   return (
     <Layout>
-      <Sider>
+      <Sider width={240}>
       </Sider>
       <Layout>
         <Header>
           Navbar
         </Header>
-        <Content>
+        <Content
+          css={css`
+            position: relative;
+            width: 100;
+            max-width: 75vw;
+            min-height: calc(100vh - 75px);
+            padding: 0 18px;
+            margin: 50px 0 0 0;
+            `}
+          >
           <Row>
             <Col span={24}>
               <div id="funds">
@@ -28,19 +38,33 @@ export const Body: React.FC = () => {
                   <Panel
                     header={
                       <div
-                        className='icon-header'
+                        css={css`
+                          display: flex;
+                          align-items: center;
+                          width: 100%;
+                          height: 43.5px;
+                          background-color: #000;
+                          & > span {
+                            font-size: 22px;
+                            font-weight: bold;
+                          }
+                        `}
                       >
-                        <img src="" />
+                        <div                             
+                          css={css`
+                            margin-right: 10px;
+                          `}>
+                          <BulbIcon width={27}/>
+                        </div>
                         <span>Managed Funds</span>
-                        <span>(Investin data here)</span>
+                        <span css={css`margin: auto 35px auto auto;`}>(Investin data here)</span>
                       </div>
                     } 
-                    role="button" 
                     key="1"
                   >
-                    <p>
-                      placeholder
-                    </p>
+                    <Table>
+                      
+                    </Table>
                   </Panel>
                 </Collapse>
               </div>

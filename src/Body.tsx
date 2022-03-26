@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { Button, Col, Collapse, List, Popover, Row, Table, Tooltip } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
@@ -8,11 +8,22 @@ import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
 import { WalletButton } from './components/WalletButton';
 import { BulbIcon } from './components/images/BulbIcon';
 import { InfoIcon } from './components/images/InfoIcon';
+import { InvestinClient, INVESTMENT_MODEL, INVESTMENT } from '@investin/client-sdk';
 
 
 export const Body: React.FC = () => {
-  const { providerMut, connection, network } = useSolana();
+  const [ managedFunds, setManagedFunds ] = useState<INVESTMENT_MODEL[] | null>(null);
+  const { connection, network } = useSolana();
   const wallet = useConnectedWallet();
+
+  const refetchFunds = useCallback(async () => {
+    if (wallet) {
+      const investinClient = new InvestinClient(connection);
+      const funds = await investinClient.getInvestmentsByInvestorAddress(wallet.publicKey);
+      console.log(funds);
+      setManagedFunds(funds);
+    }
+  }, [wallet]);
 
   const { Panel } = Collapse;
 
@@ -134,6 +145,11 @@ export const Body: React.FC = () => {
     },
   ]
 
+  useEffect(() => {
+    void refetchFunds();
+    console.log(network);
+  }, [refetchFunds]);
+
   return (
     <Layout>
       <Sider width={240}>
@@ -149,7 +165,9 @@ export const Body: React.FC = () => {
             }
           `}
         >
-          <WalletButton wallet={wallet}/>
+          <WalletButton 
+            wallet={wallet}
+            onClick={refetchFunds}/>
         </Header>
         <Content
           css={css`

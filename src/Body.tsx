@@ -4,10 +4,16 @@ import { css } from '@emotion/react';
 import { Button, Col, Collapse, List, Popover, Row, Table, Tooltip } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
+import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
+import { WalletButton } from './components/WalletButton';
 import { BulbIcon } from './components/images/BulbIcon';
 import { InfoIcon } from './components/images/InfoIcon';
 
+
 export const Body: React.FC = () => {
+  const { providerMut, connection, network } = useSolana();
+  const wallet = useConnectedWallet();
+
   const { Panel } = Collapse;
 
   const fakeDataSource = [
@@ -133,8 +139,17 @@ export const Body: React.FC = () => {
       <Sider width={240}>
       </Sider>
       <Layout>
-        <Header>
-          Navbar
+        <Header
+          css={css`
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            & > button {
+              margin-right: 20px;
+            }
+          `}
+        >
+          <WalletButton wallet={wallet}/>
         </Header>
         <Content
           css={css`

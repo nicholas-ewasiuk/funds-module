@@ -13,6 +13,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@gokiprotocol/walletkit": "^1.6.6",
+    "@investin/client-sdk": "^1.2.1",
     "@saberhq/solana-contrib": "^1.12.56",
     "@saberhq/use-solana": "^1.12.56",
     "@solana/web3.js": "^1.36.0",

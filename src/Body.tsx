@@ -8,24 +8,34 @@ import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
 import { WalletButton } from './components/WalletButton';
 import { BulbIcon } from './components/images/BulbIcon';
 import { InfoIcon } from './components/images/InfoIcon';
-import { InvestinClient, INVESTMENT_MODEL, INVESTMENT } from '@investin/client-sdk';
-
+import { getFunds } from './actions/getFunds';
+import { InvestinClient, INVESTMENT_MODEL } from '@investin/client-sdk';
+import { Fund } from './helpers';
 
 export const Body: React.FC = () => {
-  const [ managedFunds, setManagedFunds ] = useState<INVESTMENT_MODEL[] | null>(null);
+  const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
   const { connection, network } = useSolana();
   const wallet = useConnectedWallet();
 
+  /*
+  const refetchFunds = useCallback(async () => {
+    if (wallet) {
+      const funds = await getFunds(connection, wallet.publicKey);
+      console.log(funds);
+      setManagedFunds(funds);
+    }
+  }, [wallet]);
+*/
   const refetchFunds = useCallback(async () => {
     if (wallet) {
       const investinClient = new InvestinClient(connection);
       const funds = await investinClient.getInvestmentsByInvestorAddress(wallet.publicKey);
       console.log(funds);
-      setManagedFunds(funds);
     }
   }, [wallet]);
 
   const { Panel } = Collapse;
+
 
   const fakeDataSource = [
     {
@@ -150,6 +160,10 @@ export const Body: React.FC = () => {
     console.log(network);
   }, [refetchFunds]);
 
+  useEffect(() => {
+
+  }, [managedFunds])
+
   return (
     <Layout>
       <Sider width={240}>
@@ -213,7 +227,7 @@ export const Body: React.FC = () => {
                   key="1"
                 >
                   <Table
-                    dataSource={fakeDataSource}
+                    dataSource={managedFunds?.map(fund => fund.tableData)}
                     columns={columns} 
                   >
                   </Table>

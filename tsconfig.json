@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2017", "DOM"],
+    "target": "ES6",
+    "module": "CommonJS",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": false
+  },
+  "include": ["src/"]
+}

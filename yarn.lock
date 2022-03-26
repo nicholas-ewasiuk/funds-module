@@ -1126,7 +1126,7 @@
     "@ethersproject/logger" "^5.6.0"
     hash.js "1.1.7"
 
-"@gokiprotocol/walletkit@^1.6.5":
+"@gokiprotocol/walletkit@^1.6.6":
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/@gokiprotocol/walletkit/-/walletkit-1.6.6.tgz#a5d02887bb1c1f00ac84a52ef22bfae997522153"
   integrity sha512-6MVkZdSvtH2Zmn+AAfld61mLOAh8rxG82YSevKzScNvRyQqA+hMW4iFv/KUJkMtPzPR9EaWoATYv34Vhad+b6w==
@@ -1983,7 +1983,7 @@
     "@react-spring/shared" "~9.4.4"
     "@react-spring/types" "~9.4.4"
 
-"@saberhq/solana-contrib@^1.12.50", "@saberhq/solana-contrib@^1.12.56":
+"@saberhq/solana-contrib@^1.12.56":
   version "1.12.56"
   resolved "https://registry.yarnpkg.com/@saberhq/solana-contrib/-/solana-contrib-1.12.56.tgz#0472ba6960d9993c37808697d7afff5b63e11b14"
   integrity sha512-b6Szv+XqJE9pFqQ6QfQluRyvQIXAdmLk/KrZ2Ks/XtQVMX2ZxdBf5mGozGNa8NzuzgeOzj/BQ8akbAazfll5dw==
@@ -1995,7 +1995,7 @@
     tiny-invariant "^1.2.0"
     tslib "^2.3.1"
 
-"@saberhq/use-solana@^1.12.50":
+"@saberhq/use-solana@^1.12.56":
   version "1.12.56"
   resolved "https://registry.yarnpkg.com/@saberhq/use-solana/-/use-solana-1.12.56.tgz#65ad0b5f03028832ecdaadc6d7029b69ae5922d0"
   integrity sha512-GMgBN6A2EZ6/Sgj9E8oQqabcH2maL04Uv2f31lMLG3XAWLuwp1IGwOtcBpdrd9ANjE+hFVyujqUl7sVhLBXP7A==

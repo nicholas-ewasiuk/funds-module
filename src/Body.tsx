@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
 import { css } from '@emotion/react';
-import { Button, Col, Collapse, Row, Table } from 'antd';
+import { Button, Col, Collapse, List, Popover, Row, Table, Tooltip } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import { BulbIcon } from './components/images/BulbIcon';
@@ -34,6 +34,27 @@ export const Body: React.FC = () => {
     },
   ]
 
+  const tooltipDataSource = [
+    {
+      key: '1',
+      amount: '509.80',
+      ticker: 'STEP',
+      weighting: '33%',
+    },
+    {
+      key: '2',
+      amount: '403.02',
+      ticker: 'USDC',
+      weighting: '34%',
+    },
+    {
+      key: '3',
+      amount: '300.22',
+      ticker: 'SOL',
+      weighting: '32%',
+    },
+  ]
+
   const columns = [
     {
       title: 'Platform',
@@ -60,17 +81,40 @@ export const Body: React.FC = () => {
           css={css`
             display: flex;
             flex-direction: column;
-            & > span {
-              margin: 0 0 5px 0;
-              font-weight: bold;
-            }
           `}
         >
-          <span>{value}</span>
-          <div css={cell_row}>
+          <span
+            css={css`
+              margin: 0 0 5px 0;
+              font-weight: bold;
+            `}
+          >
+            {value}
+          </span>
+          <Tooltip 
+            css={[cell_row, tooltip]}
+            title={
+              <>
+                <span>Fund Composition</span>
+                <List
+                  dataSource={tooltipDataSource}
+                  renderItem={item => 
+                    <>
+                      <List.Item css={list_item}>
+                        <span>{item.amount}</span>
+                        <span>{item.ticker}</span>
+                        <span>{item.weighting}</span>
+                      </List.Item>
+                  </>
+                  }
+                />
+              </>
+            }
+            placement='bottomRight'
+          >
             <span>Across X Assets</span>
             <InfoIcon />
-          </div>
+          </Tooltip>
           <div css={cell_row}>
             <Button>
               Step in
@@ -166,4 +210,19 @@ const cell_row = css`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+`
+
+const tooltip = css`
+  margin: 0 0 10px 0;
+  & > span {
+    margin-right: 5px;
+    font-size: 10px;
+    font-weight: normal;
+  }
+`
+
+const list_item = css`
+  display: flex;
+  justify-content: space-around;
+  width: 185px;
 `

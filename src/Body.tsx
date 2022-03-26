@@ -40,7 +40,7 @@ export const Body: React.FC = () => {
     if (funds) {
       let total = 0;
       funds.forEach((fund) => {
-        total += parseInt(fund.tableData.value, 10);
+        total += parseInt(fund.tableData.value.slice(1), 10);
       });
       return total.toFixed(2);
     }

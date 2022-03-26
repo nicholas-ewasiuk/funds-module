@@ -34,8 +34,8 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
         key: index,
         platform: 'Investin',
         fundName: fund.fundName.toString(),
-        performance: fund.currentPerformance.toFixed(2),
-        value: fund.status === 'inActive' ? fund.amountInRouter.toString() : fund.currentReturns.toString(),
+        performance: fund.currentPerformance.toFixed(2)+'%',
+        value: fund.status === 'inActive' ? '$'+fund.amountInRouter : '$'+fund.currentReturns,
       },
       tooltipData: fund.tokens.map((t) => ({
         amount: t.balance.valueOf()/1000000,

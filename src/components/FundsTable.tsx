@@ -24,8 +24,8 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
         },
         {
           title: 'Fund Name',
-          dataIndex: 'name',
-          key: 'name',
+          dataIndex: 'fundName',
+          key: 'fundName',
         },
         {
           title: 'Fund Performance',

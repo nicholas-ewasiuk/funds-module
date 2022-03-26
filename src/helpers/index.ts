@@ -13,7 +13,6 @@ export interface TooltipData {
   weighting: number
 }
 
-
 export interface Fund {
   fundBalance: number
   tableData: TableData

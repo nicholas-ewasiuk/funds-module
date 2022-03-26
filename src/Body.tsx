@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { Button, Col, Collapse, List, Popover, Row, Table, Tooltip } from 'antd';
+import { Col, Collapse, Row } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
@@ -21,7 +21,7 @@ export const Body: React.FC = () => {
 
   const { Panel } = Collapse;
   
-  /*
+  
   const refetchFundsOld = useCallback(async () => {
     if (wallet) {
       const address = new PublicKey('6KQDNrJoPJRa1UHX7C4Wf5FHgjvnswLMTePyUTySFKeQ')
@@ -34,7 +34,7 @@ export const Body: React.FC = () => {
     useEffect(() => {
       void refetchFundsOld();
     }, [refetchFundsOld]);
-  */
+  
 
   const calculateTotalBalance = (funds: Fund[] | undefined) => {
     if (funds) {
@@ -55,7 +55,6 @@ export const Body: React.FC = () => {
 
   useEffect(() => {
     void refetchFunds();
-    console.log(network);
   }, [refetchFunds]);
 
   return (
@@ -116,7 +115,7 @@ export const Body: React.FC = () => {
                       </div>
                       <span>Managed Funds</span>
                       <span css={css`margin: auto 35px auto auto;`}>
-                        {managedFunds ? calculateTotalBalance(managedFunds) : "-- "}
+                        {managedFunds ? "$"+calculateTotalBalance(managedFunds) : "-- "}
                       </span>
                     </div>
                   } 

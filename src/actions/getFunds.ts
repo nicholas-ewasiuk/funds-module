@@ -32,12 +32,12 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
       fundBalance: 0,
       tableData: {
         key: index,
-        platform: "Investin",
+        platform: 'Investin',
         fundName: fund.fundName.toString(),
         performance: fund.currentPerformance.toFixed(2),
-        value: fund.amount.valueOf() + fund.amountInRouter.valueOf(),
+        value: fund.status === 'inActive' ? fund.amountInRouter : fund.currentReturns,
       },
-      composition: fund.tokens.map((t) => ({
+      tooltipData: fund.tokens.map((t) => ({
         amount: t.balance.valueOf()/1000000,
         ticker: t.symbol,
         price: t.symbol == 'USDC' ? 1 : getTokenPrice(t, prices)?.price,
@@ -46,16 +46,16 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
     })
   );
   funds.forEach((f) => {
-    f.composition.forEach((c) => {
-      if (c.price && c.amount) {
-        f.fundBalance += c.price * c.amount;
+    f.tooltipData.forEach((t) => {
+      if (t.price && t.amount) {
+        f.fundBalance += t.price * t.amount;
       }
     });
   });
   funds.forEach((f) => {
-    f.composition.forEach((c) => {
-      if (c.price && c.amount) {
-        c.weighting = c.price * c.amount / f.fundBalance;
+    f.tooltipData.forEach((t) => {
+      if (t.price && t.amount) {
+        t.weighting = t.price * t.amount / f.fundBalance * 100;
       }
     });
   });

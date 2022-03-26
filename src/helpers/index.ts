@@ -3,7 +3,7 @@ export interface TableData {
   platform: string
   fundName: string
   performance: string
-  value: number
+  value: string
 }
 
 export interface TooltipData {
@@ -17,5 +17,5 @@ export interface TooltipData {
 export interface Fund {
   fundBalance: number
   tableData: TableData
-  composition: TooltipData[]
+  tooltipData: TooltipData[]
 }

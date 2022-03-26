@@ -12,10 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@gokiprotocol/walletkit": "^1.6.6",
+    "@gokiprotocol/walletkit": "^1.6.5",
     "@investin/client-sdk": "^1.2.1",
-    "@saberhq/solana-contrib": "^1.12.56",
-    "@saberhq/use-solana": "^1.12.56",
+    "@saberhq/solana-contrib": "^1.12.50",
+    "@saberhq/use-solana": "^1.12.50",
     "@solana/web3.js": "^1.36.0",
     "antd": "^4.19.3",
     "bn.js": "^5.2.0",

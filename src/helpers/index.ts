@@ -6,14 +6,16 @@ export interface TableData {
   value: number
 }
 
-export interface IToken {
-  amount: string
+export interface TooltipData {
+  amount: number
   ticker: string
-  weighting: string
+  price: number | undefined
+  weighting: number
 }
 
 
 export interface Fund {
+  fundBalance: number
   tableData: TableData
-  composition: IToken[]
+  composition: TooltipData[]
 }

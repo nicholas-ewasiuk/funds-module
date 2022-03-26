@@ -17,7 +17,6 @@ export const Body: React.FC = () => {
   const { connection, network } = useSolana();
   const wallet = useConnectedWallet();
 
-  /*
   const refetchFunds = useCallback(async () => {
     if (wallet) {
       const funds = await getFunds(connection, wallet.publicKey);
@@ -25,7 +24,8 @@ export const Body: React.FC = () => {
       setManagedFunds(funds);
     }
   }, [wallet]);
-*/
+
+/*/
   const refetchFunds = useCallback(async () => {
     if (wallet) {
       const investinClient = new InvestinClient(connection);
@@ -33,7 +33,7 @@ export const Body: React.FC = () => {
       console.log(funds);
     }
   }, [wallet]);
-
+/*/
   const { Panel } = Collapse;
 
 

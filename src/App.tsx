@@ -1,7 +1,7 @@
 import React from 'react';
 import { WalletKitProvider } from '@gokiprotocol/walletkit';
 import { Body } from './Body';
-import './index.css';
+import './app.less';
 
 
 const App: React.FC = () => {

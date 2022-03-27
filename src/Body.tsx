@@ -15,7 +15,7 @@ import { FundsTable } from './components/FundsTable';
 export const Body: React.FC = () => {
   const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
 
-  const { connection, network } = useSolana();
+  const { connection } = useSolana();
   const wallet = useConnectedWallet();
 
   const { Panel } = Collapse;
@@ -66,7 +66,7 @@ export const Body: React.FC = () => {
                         css={css`
                           margin-right: 10px;
                         `}>
-                        <BulbIcon width={27}/>
+                        <BulbIcon width={25}/>
                       </div>
                       <span>Managed Funds</span>
                       <span css={css`margin: auto 35px auto auto;`}>
@@ -94,6 +94,7 @@ const main_header = css`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  padding: 0 80px 0 50px;
   & > button {
     margin-right: 20px;
   }

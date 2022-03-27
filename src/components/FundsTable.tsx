@@ -5,6 +5,8 @@ import { Button, Table } from 'antd';
 import { FundTooltip } from './FundTooltip';
 import { TableData, TooltipData } from '../helpers';
 import { ColumnsType } from "antd/lib/table";
+import styled from "@emotion/styled";
+import images from '../assets/index';
 
 type Props = {
   tableData: TableData[] | undefined
@@ -21,11 +23,40 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
           title: 'Platform',
           dataIndex: 'platform',
           key: 'platform',
+          render: (platform) => (
+            <div 
+              css={css`
+                display: flex;
+                align-items: flex-start;
+              `}
+            >
+              <img 
+                css={css`
+                  width: 28px;
+                  margin: 0 10px 0 0;
+                `}
+                src={images.investin_logo}
+              />
+              <span>{platform}</span>
+            </div>
+          )
         },
         {
           title: 'Fund Name',
           dataIndex: 'fundName',
           key: 'fundName',
+          render: (fundName) => (
+            <a
+              css={css`
+                color: #00f8b7;
+              `}
+              href={`https://sol.beta.investin.pro/fund-details/${fundName}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {fundName.slice(0,4) + '...' + fundName.slice(-4)}
+            </a>
+          )
         },
         {
           title: 'Fund Performance',
@@ -58,7 +89,7 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
                   tooltipData={toolTipDataArr[record.key]}
                 />
               }
-              <div css={cell_row}>
+              <div css={cell_btn_row}>
                 <Button>
                   Step in
                 </Button>
@@ -75,12 +106,42 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
   }, [tableData, toolTipDataArr])
 
   return (
-    <Table
+    <StepTabs
       dataSource={tableData}
-      columns={columns} 
+      columns={columns}
+      pagination={false}
     />
   );
 };
+
+const StepTabs = styled(Table)`
+  .ant-table-content > table {
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+  }
+  .ant-table-thead > tr > th {
+    border: none;
+    background-color: inherit;
+    font-weight: normal;
+    color: #B2B2B2;
+    &::before {
+      visibility: hidden;
+    }
+  }
+  .ant-table-tbody > tr > td {
+    vertical-align: top;
+    padding: 20px;
+    border: none;
+    background-color: #202020;
+  }
+`;
+
+const cell_btn_row = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;
 
 const btn_secondary = css`
   margin: 0 0 0 10px;
@@ -91,11 +152,4 @@ const btn_secondary = css`
     background-color: #B2B2B2;
     color: #000;
   }
-`;
-
-const cell_row = css`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
 `;

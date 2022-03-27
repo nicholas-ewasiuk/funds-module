@@ -33,7 +33,7 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
       tableData: {
         key: index,
         platform: 'Investin',
-        fundName: fund.fundName.toString(),
+        fundName: fund.fundAddress.toString(),
         performance: fund.currentPerformance.toFixed(2)+'%',
         value: fund.status === 'inActive' ? '$'+fund.amountInRouter : '$'+fund.currentReturns,
       },

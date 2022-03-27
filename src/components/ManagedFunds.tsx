@@ -48,7 +48,10 @@ export const ManagedFunds = ({ funds, keyProp }: Props) => {
               <span css={css`margin: auto 40px auto auto;`}>
                 {funds ? "$"+calculateTotalBalance(funds) : "-- "}
               </span>
-              <div className='ant-collapse-arrow'>
+              <div 
+                css={css`padding-top: 4px;`}
+                className='ant-collapse-arrow'
+              >
                 <ArrowIcon />
               </div>
             </div>

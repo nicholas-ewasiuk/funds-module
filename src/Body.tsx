@@ -15,10 +15,12 @@ import { Fund } from './helpers';
 export const Body: React.FC = () => {
   const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
 
-  const { connection } = useSolana();
+  const { connection, network, setNetwork } = useSolana();
   const wallet = useConnectedWallet();
 
   const refetchFunds = useCallback(async () => {
+    setNetwork('mainnet-beta');
+    console.log(network);
     if (wallet) {
       const funds = await getFunds(connection, wallet.publicKey);
       setManagedFunds(funds);

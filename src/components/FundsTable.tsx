@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { css } from '@emotion/react';
 import styled from "@emotion/styled";
-import { Button, Table } from 'antd';
+import { Table } from 'antd';
 import { ColumnsType } from "antd/lib/table";
 
 import { PositionTools } from './PositionTools';
@@ -49,7 +49,7 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
           render: (fundName) => (
             <a
               css={css`
-                color: #00f8b7;
+                color: #06D6A0;
               `}
               href={`https://sol.beta.investin.pro/fund-details/${fundName}`}
               target="_blank"
@@ -106,7 +106,7 @@ const StepTabs = styled(Table)`
       visibility: hidden;
     }
   }
-  .ant-table-thead > tr > th:first-child {
+  .ant-table-thead > tr > th:first-of-type {
     padding-left: 0px;
   }
   .ant-table-thead > tr > th:last-child {
@@ -123,16 +123,5 @@ const StepTabs = styled(Table)`
     padding: 16px;
     border: none;
     background-color: #202020;
-  }
-`;
-
-const btn_secondary = css`
-  margin: 0 0 0 10px;
-  border-style: none;
-  background-color: #3D3D3D;
-  color: #B2B2B2;
-  &:hover {
-    background-color: #B2B2B2;
-    color: #000;
   }
 `;

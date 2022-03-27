@@ -15,14 +15,49 @@ export const FundTooltip = ({ tooltipData }: Props) => {
     <StepTooltip 
       title={
         <>
-          <span css={css`margin-left: 7px;`}>Fund Composition</span>
+          <span 
+            css={css`
+              margin-left: 7px;
+              font-size: 10px;
+              font-weight: bold;
+            `}
+          >
+            Fund Composition
+          </span>
           <List
             dataSource={tooltipData}
             renderItem={item => 
-              <List.Item css={css`min-width: 200px;`}>
-                <span css={css`margin-left: 7px;`}>{item.amount.toFixed(2)}</span>
-                <span css={css`font-weight: bold;`}>{item.ticker}</span>
-                <span css={css`margin-right: 7px;`}>{item.weighting.toFixed(2)+'%'}</span>
+              <List.Item 
+                css={css`
+                  font-size: 10px;
+                `}
+              >
+                <span 
+                  css={css`
+                    margin-left: 7px; 
+                    width: 74px;
+                  `}
+                >
+                  {item.amount.toString()}
+                </span>
+                <span 
+                  css={css`
+                    font-weight: bold; 
+                    width: 50px;
+                    text-align: right;
+                  `}
+                >
+                  {item.ticker}
+                </span>
+                <span 
+                  css={css`
+                    margin-right: 7px; 
+                    width: 60px;
+                    text-align: right;
+                  `}
+                >
+                  {item.weighting.toFixed(2)+'%'}
+                </span>
               </List.Item>
             }
           />

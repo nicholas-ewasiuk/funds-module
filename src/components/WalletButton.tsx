@@ -17,7 +17,7 @@ export const WalletButton = ({ wallet, onClick }: Props) => {
     <>
     { wallet ? (
       <>
-        <Button css={connected}>
+        <Button css={[connected, css`margin-right: 10px;`]}>
           {wallet.publicKey.toString().slice(0,4) + '...' + wallet.publicKey.toString().slice(-4)}
         </Button>
         <Button 

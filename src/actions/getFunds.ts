@@ -20,7 +20,7 @@ function getTokenPrice(token: Token, prices: COINGECKO_TOKEN[]){
       );
   }
   return price;
-}
+};
 
 export const getFunds = async (connection: Connection, owner: PublicKey): Promise<Fund[]> => {
   const investinClient = new InvestinClient(connection);
@@ -35,7 +35,7 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
         platform: 'Investin',
         fundName: fund.fundAddress.toString(),
         performance: fund.currentPerformance.toFixed(2)+'%',
-        value: fund.status === 'inActive' ? '$'+fund.amountInRouter : '$'+fund.currentReturns,
+        value: fund.status === 'inActive' ? fund.amountInRouter.toString() : fund.currentReturns.toString(),
       },
       tooltipData: fund.tokens.map((t) => ({
         amount: t.balance.valueOf()/1000000,
@@ -61,4 +61,4 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
   });
 
   return funds;
-}
+};

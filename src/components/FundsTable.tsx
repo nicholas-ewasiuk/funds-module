@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect, useState } from "react";
 import { css } from '@emotion/react';
+import styled from "@emotion/styled";
 import { Button, Table } from 'antd';
+import { ColumnsType } from "antd/lib/table";
+
 import { FundTooltip } from './FundTooltip';
 import { TableData, TooltipData } from '../helpers';
-import { ColumnsType } from "antd/lib/table";
-import styled from "@emotion/styled";
 import images from '../assets/index';
 
 type Props = {
@@ -81,15 +82,20 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
                   font-weight: bold;
                 `}
               >
-                {value}
+                {'$'+parseFloat(value).toFixed(2)}
               </span>
               { toolTipDataArr && 
                 <FundTooltip 
-                  index={record.key}
                   tooltipData={toolTipDataArr[record.key]}
                 />
               }
-              <div css={cell_btn_row}>
+              <div css={css`
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-end;
+                  align-items: center;
+                `}
+              >
                 <Button>
                   Step in
                 </Button>
@@ -124,23 +130,29 @@ const StepTabs = styled(Table)`
     background-color: inherit;
     font-weight: normal;
     color: #B2B2B2;
+    user-select: none;
     &::before {
       visibility: hidden;
     }
   }
+  .ant-table-thead > tr > th:first-child {
+    padding-left: 0px;
+  }
+  .ant-table-thead > tr > th:last-child {
+    padding-right: 0px;
+  }
   .ant-table-tbody > tr > td {
     vertical-align: top;
-    padding: 20px;
+    padding: 16px;
     border: none;
     background-color: #202020;
   }
-`;
-
-const cell_btn_row = css`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  .ant-table-tbody > tr:hover > td {
+    vertical-align: top;
+    padding: 16px;
+    border: none;
+    background-color: #202020;
+  }
 `;
 
 const btn_secondary = css`

@@ -4,7 +4,6 @@
   "description": "Investin integration component for Step Finance",
   "author": "nicholas-ewasiuk <ewasiuk.nick@gamil.com>",
   "license": "MIT",
-  "source": "src/index.html",
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html"

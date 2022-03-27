@@ -47,6 +47,10 @@ export const PositionTools = ({ toolTipDataArr, value, recordKey }: Props) => {
               background-color: #B2B2B2;
               color: #000;
             }
+            &:focus {
+              background-color: #3D3D3D;
+              color: #B2B2B2;
+            }
           `}
         >
           Step out

@@ -15,20 +15,20 @@ export const FundTooltip = ({ tooltipData }: Props) => {
     <StepTooltip 
       title={
         <>
-          <span>Fund Composition</span>
+          <span css={css`margin-left: 7px;`}>Fund Composition</span>
           <List
             dataSource={tooltipData}
             renderItem={item => 
-                <List.Item css={list_item}>
-                  <span>{item.amount.toFixed(2)}</span>
-                  <span>{item.ticker}</span>
-                  <span>{item.weighting.toFixed(2)+'%'}</span>
-                </List.Item>
+              <List.Item css={css`min-width: 200px;`}>
+                <span css={css`margin-left: 7px;`}>{item.amount.toFixed(2)}</span>
+                <span css={css`font-weight: bold;`}>{item.ticker}</span>
+                <span css={css`margin-right: 7px;`}>{item.weighting.toFixed(2)+'%'}</span>
+              </List.Item>
             }
           />
         </>
       }
-      placement='bottomRight'
+      placement='bottomLeft'
     >
       <span>Across {tooltipData.length} Assets</span>
       <InfoIcon />
@@ -37,18 +37,12 @@ export const FundTooltip = ({ tooltipData }: Props) => {
 };
 
 const StepTooltip = styled(Tooltip)`
-  width: 90px;
   margin: 0 0 10px 0;
+  width: 90px;
   cursor: pointer; 
   & > span {
     margin-right: 5px;
     font-size: 10px;
     font-weight: normal;
-    user-select: none; 
   }
-`
-const list_item = css`
-  display: flex;
-  justify-content: space-around;
-  width: 185px;
 `;

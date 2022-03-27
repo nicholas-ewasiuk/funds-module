@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { Button, Table } from 'antd';
 import { ColumnsType } from "antd/lib/table";
 
-import { FundTooltip } from './FundTooltip';
+import { PositionTools } from './PositionTools';
 import { TableData, TooltipData } from '../helpers';
 import images from '../assets/index';
 
@@ -70,40 +70,11 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
           dataIndex: 'value',
           align: 'right',
           render: (value, record) => (
-            <div 
-              css={css`
-                display: flex;
-                flex-direction: column;
-              `}
-            >
-              <span
-                css={css`
-                  margin: 0 0 5px 0;
-                  font-weight: bold;
-                `}
-              >
-                {'$'+parseFloat(value).toFixed(2)}
-              </span>
-              { toolTipDataArr && 
-                <FundTooltip 
-                  tooltipData={toolTipDataArr[record.key]}
-                />
-              }
-              <div css={css`
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: flex-end;
-                  align-items: center;
-                `}
-              >
-                <Button>
-                  Step in
-                </Button>
-                <Button css={btn_secondary}>
-                  Step out
-                </Button>
-              </div>
-            </div>
+            <PositionTools
+              toolTipDataArr={toolTipDataArr}
+              value={value}
+              recordKey={record.key}
+            />
           )
         },
       ]

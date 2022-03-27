@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { List, Tooltip } from "antd"
 
 import { InfoIcon } from "./images/InfoIcon";
 import { TooltipData } from '../helpers';
-import styled from "@emotion/styled";
 
 type Props = {
   tooltipData: TooltipData[]
@@ -19,13 +19,11 @@ export const FundTooltip = ({ tooltipData }: Props) => {
           <List
             dataSource={tooltipData}
             renderItem={item => 
-              <>
                 <List.Item css={list_item}>
                   <span>{item.amount.toFixed(2)}</span>
                   <span>{item.ticker}</span>
                   <span>{item.weighting.toFixed(2)+'%'}</span>
                 </List.Item>
-              </>
             }
           />
         </>
@@ -39,15 +37,14 @@ export const FundTooltip = ({ tooltipData }: Props) => {
 };
 
 const StepTooltip = styled(Tooltip)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  width: 90px;
   margin: 0 0 10px 0;
+  cursor: pointer; 
   & > span {
     margin-right: 5px;
     font-size: 10px;
     font-weight: normal;
+    user-select: none; 
   }
 `
 const list_item = css`

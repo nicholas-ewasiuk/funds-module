@@ -61,7 +61,7 @@ export const ManagedFunds = ({ funds, keyProp }: Props) => {
         >
           <FundsTable
             tableData={funds?.map(fund => fund.tableData)}
-            toolTipDataArr={funds?.map(fund => fund.tooltipData)}
+            tooltipDataArr={funds?.map(fund => fund.tooltipData)}
            />
         </Panel>
       </StepCollapse>

@@ -6,12 +6,12 @@ import { FundTooltip } from './FundTooltip';
 import { TooltipData } from '../helpers';
 
 type Props = {
-  toolTipDataArr: TooltipData[][] | undefined
+  tooltipDataArr: TooltipData[][] | undefined
   value: string
   recordKey: number 
 }
 
-export const PositionTools = ({ toolTipDataArr, value, recordKey }: Props) => {
+export const PositionTools = ({ tooltipDataArr, value, recordKey }: Props) => {
   return (
     <div 
       css={css`
@@ -28,9 +28,9 @@ export const PositionTools = ({ toolTipDataArr, value, recordKey }: Props) => {
       >
         {'$'+parseFloat(value).toFixed(2)}
       </span>
-      { toolTipDataArr && 
+      { tooltipDataArr && 
         <FundTooltip 
-          tooltipData={toolTipDataArr[recordKey]}
+          tooltipData={tooltipDataArr[recordKey]}
         />
       }
       <div>

@@ -1,7 +1,7 @@
 export interface TableData {
   key: number
   platform: string
-  fundName: string
+  fundName: { title: string, address: string }
   performance: string
   value: string
 }

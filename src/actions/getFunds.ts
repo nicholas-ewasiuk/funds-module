@@ -2,6 +2,7 @@ import { InvestinClient, raydiumPools, orcaPools, COINGECKO_TOKEN } from "@inves
 import { Connection, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
 import { Fund } from "../helpers";
+import { SolanaFunds } from "../helpers/solanaFunds";
 
 interface Token {
   symbol: string
@@ -22,18 +23,27 @@ function getTokenPrice(token: Token, prices: COINGECKO_TOKEN[]){
   return price;
 };
 
+const getFundName = (
+  fundAddress: string,
+  funds: any[]
+): string => {
+  const fund = funds.find((f) => 
+    fundAddress == f.address)
+  return fund.name;
+};
+
 export const getFunds = async (connection: Connection, owner: PublicKey): Promise<Fund[]> => {
   const investinClient = new InvestinClient(connection);
   const investments = await investinClient.getInvestmentsByInvestorAddress(owner);
   const prices = await investinClient.fetchAllTokenPrices();
-
+  
   const funds: Fund[] = investments
     .map((fund, index) => ({
       fundBalance: 0,
       tableData: {
         key: index,
         platform: 'Investin',
-        fundName: fund.fundAddress.toString(),
+        fundName: { title: getFundName(fund.fundAddress, SolanaFunds), address: fund.fundAddress },
         performance: fund.currentPerformance.toFixed(2)+'%',
         value: fund.status === 'inActive' ? fund.amountInRouter.toString() : fund.currentReturns.toString(),
       },
@@ -59,6 +69,5 @@ export const getFunds = async (connection: Connection, owner: PublicKey): Promis
       }
     });
   });
-
   return funds;
 };

@@ -11,14 +11,14 @@ import images from '../assets/index';
 
 type Props = {
   tableData: TableData[] | undefined
-  toolTipDataArr: TooltipData[][] | undefined
+  tooltipDataArr: TooltipData[][] | undefined
 }
 
-export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
+export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
   const [ columns, setColumns ] = useState<ColumnsType<TableData> | undefined>(undefined);
 
   useEffect(() => {
-    if (tableData && toolTipDataArr) {
+    if (tableData && tooltipDataArr) {
       const columns: ColumnsType<TableData> = [
         {
           title: 'Platform',
@@ -51,11 +51,11 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
               css={css`
                 color: #06D6A0;
               `}
-              href={`https://sol.beta.investin.pro/fund-details/${fundName}`}
+              href={`https://sol.beta.investin.pro/fund-details/${fundName.address}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {fundName.slice(0,4) + '...' + fundName.slice(-4)}
+              {fundName.title}
             </a>
           )
         },
@@ -71,7 +71,7 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
           align: 'right',
           render: (value, record) => (
             <PositionTools
-              toolTipDataArr={toolTipDataArr}
+              tooltipDataArr={tooltipDataArr}
               value={value}
               recordKey={record.key}
             />
@@ -80,7 +80,7 @@ export const FundsTable = ({ tableData, toolTipDataArr }: Props) => {
       ]
       setColumns(columns);
     };
-  }, [tableData, toolTipDataArr])
+  }, [tableData, tooltipDataArr])
 
   return (
     <StepTabs

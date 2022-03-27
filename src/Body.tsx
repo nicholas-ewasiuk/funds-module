@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
+import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
 import { Col, Collapse, Row } from 'antd';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
-import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
+
+import { Fund } from './helpers';
 import { WalletButton } from './components/WalletButton';
 import { BulbIcon } from './components/images/BulbIcon';
 import { getFunds } from './actions/getFunds';
-import { Fund } from './helpers';
 import { FundsTable } from './components/FundsTable';
-import { InvestinClient } from '@investin/client-sdk';
-import { PublicKey } from '@solana/web3.js';
 
 export const Body: React.FC = () => {
   const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
@@ -20,21 +19,6 @@ export const Body: React.FC = () => {
   const wallet = useConnectedWallet();
 
   const { Panel } = Collapse;
-  
-  
-  const refetchFundsOld = useCallback(async () => {
-    if (wallet) {
-      const address = new PublicKey('6KQDNrJoPJRa1UHX7C4Wf5FHgjvnswLMTePyUTySFKeQ')
-      const investinClient = new InvestinClient(connection);
-      const funds = await investinClient.getInvestmentsByInvestorAddress(address);
-      console.log(funds);
-    }
-  }, [wallet]);
-
-    useEffect(() => {
-      void refetchFundsOld();
-    }, [refetchFundsOld]);
-  
 
   const calculateTotalBalance = (funds: Fund[] | undefined) => {
     if (funds) {
@@ -62,29 +46,12 @@ export const Body: React.FC = () => {
       <Sider width={240}>
       </Sider>
       <Layout>
-        <Header
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-end;
-            & > button {
-              margin-right: 20px;
-            }
-          `}
-        >
+        <Header css={main_header} >
           <WalletButton 
             wallet={wallet}
             onClick={refetchFunds}/>
         </Header>
-        <Content
-          css={css`
-            position: relative;
-            width: 100;
-            max-width: 75vw;
-            padding: 0 18px;
-            margin: 50px 0 0 0;
-            `}
-          >
+        <Content css={content}>
           <Row>
             <Col span={24}>
               <Collapse 
@@ -94,19 +61,7 @@ export const Body: React.FC = () => {
               >
                 <Panel
                   header={
-                    <div
-                      css={css`
-                        display: flex;
-                        align-items: center;
-                        width: 100%;
-                        height: 43.5px;
-                        background-color: #000;
-                        & > span {
-                          font-size: 22px;
-                          font-weight: bold;
-                        }
-                      `}
-                    >
+                    <div css={table_header}>
                       <div                             
                         css={css`
                           margin-right: 10px;
@@ -134,3 +89,32 @@ export const Body: React.FC = () => {
     </Layout>
   );
 };
+
+const main_header = css`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  & > button {
+    margin-right: 20px;
+  }
+`;
+
+const content = css`
+  position: relative;
+  width: 100;
+  max-width: 75vw;
+  padding: 0 18px;
+  margin: 50px 0 0 0;
+`;
+
+const table_header = css`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 43.5px;
+  background-color: #000;
+  & > span {
+    font-size: 22px;
+    font-weight: bold;
+  }
+`;

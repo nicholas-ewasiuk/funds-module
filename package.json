@@ -2,7 +2,7 @@
   "name": "funds-module",
   "version": "1.0.0",
   "description": "Investin integration component for Step Finance",
-  "author": "nicholas-ewasiuk <ewasiuk.nick@gamil.com>",
+  "author": "nicholas-ewasiuk <ewasiuk.nick@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "parcel ./src/index.html",

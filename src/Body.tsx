@@ -8,6 +8,7 @@ import Sider from 'antd/lib/layout/Sider';
 
 import { WalletButton } from './components/WalletButton';
 import { ManagedFunds } from './components/ManagedFunds';
+import { getFunds } from './actions/getFunds';
 import { Fund } from './helpers';
 
 
@@ -21,6 +22,8 @@ export const Body: React.FC = () => {
     setNetwork('mainnet-beta');
     console.log(network);
     if (wallet) {
+      const funds = await getFunds(connection, wallet.publicKey);
+      setManagedFunds(funds);
     }
   }, [wallet]);
 

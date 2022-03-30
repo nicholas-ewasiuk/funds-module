@@ -1,8 +1,9 @@
 import { InvestinClient, raydiumPools, orcaPools, COINGECKO_TOKEN } from "@investin/client-sdk";
 import { Connection, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
+import axios from "axios";
 import { Fund } from "../helpers";
-import { SolanaFunds } from "../helpers/solanaFunds";
+
 
 interface Token {
   symbol: string
@@ -26,21 +27,8 @@ const getTokenPrice = (
   return price;
 };
 
-const getFundName = (
-  fundAddress: string,
-  funds: any[]
-): string => {
-  const fund = funds.find((f) => 
-    fundAddress == f.address)
-  return fund.name;
-};
-
-
 /**
  * Retrieve's fund account data and maps it to Fund object. 
- * Compare's fund address to fund name from Investin server data. 
- * Not exposed in investin/client-sdk, currently using snapshot from 
- * https://capitalfund-api-1-8ftn8.ondigitalocean.app/solanaFunds.
  * 
  * @param connection 
  * @param owner 
@@ -53,6 +41,7 @@ export const getFunds = async (
   const investinClient = new InvestinClient(connection);
   const investments = await investinClient.getInvestmentsByInvestorAddress(owner);
   const prices = await investinClient.fetchAllTokenPrices();
+  const fundData = (await axios.get("https://capitalfund-api-1-8ftn8.ondigitalocean.app/solanaFunds")).data;
   
   const funds: Fund[] = investments
     .map((fund, index) => ({
@@ -60,7 +49,12 @@ export const getFunds = async (
       tableData: {
         key: index,
         platform: 'Investin',
-        fundName: { title: getFundName(fund.fundAddress, SolanaFunds), address: fund.fundAddress },
+        fundName: { 
+          title: fundData ? 
+            fundData.find((f: any) => fund.fundAddress == f.address).name : 
+            fund.fundAddress.slice(0,4) + "..." + fund.fundAddress.slice(-4),
+          address: fund.fundAddress 
+        },
         performance: fund.currentPerformance.toFixed(2)+'%',
         value: fund.status === 'inActive' ? fund.amountInRouter.toString() : fund.currentReturns.toString(),
       },

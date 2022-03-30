@@ -10,6 +10,9 @@ type Props = {
   tooltipData: TooltipData[]
 }
 
+/**
+ * Styled antd tooltip for displaying fund composition.
+ */
 export const FundTooltip = ({ tooltipData }: Props) => {
   return (
     <StepTooltip 

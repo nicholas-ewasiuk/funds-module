@@ -10,6 +10,9 @@ type Props = {
   onClick: React.MouseEventHandler;
 }
 
+/**
+ * Connect wallet button using Goki Protocol Walletkit
+ */
 export const WalletButton = ({ wallet, onClick }: Props) => {
   const { connect } = useWalletKit();
 

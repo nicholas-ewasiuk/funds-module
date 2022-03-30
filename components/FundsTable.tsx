@@ -15,6 +15,9 @@ type Props = {
   tooltipDataArr: TooltipData[][] | undefined
 }
 
+/**
+ * Styled antd table for displaying fund data.
+ */
 export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
   const [ columns, setColumns ] = useState<any | undefined>(undefined);
 

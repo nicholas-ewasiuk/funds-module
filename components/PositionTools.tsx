@@ -11,6 +11,9 @@ type Props = {
   recordKey: number 
 }
 
+/**
+ * Cell components for "Value of Your Position column".
+ */
 export const PositionTools = ({ tooltipDataArr, value, recordKey }: Props) => {
   return (
     <div 

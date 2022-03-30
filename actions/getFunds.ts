@@ -11,7 +11,10 @@ interface Token {
   decimals: BN
 }
 
-function getTokenPrice(token: Token, prices: COINGECKO_TOKEN[]){
+const getTokenPrice = (
+  token: Token, 
+  prices: COINGECKO_TOKEN[]
+) => {
   const coinSymbol = [...raydiumPools, ...orcaPools].find(p => p.coin.mintAddress == token.mint.toBase58());
   let price;
   if (coinSymbol) {
@@ -32,7 +35,21 @@ const getFundName = (
   return fund.name;
 };
 
-export const getFunds = async (connection: Connection, owner: PublicKey): Promise<Fund[]> => {
+
+/**
+ * Retrieve's fund account data and maps it to Fund object. 
+ * Compare's fund address to fund name from Investin server data. 
+ * Not exposed in investin/client-sdk, currently using snapshot from 
+ * https://capitalfund-api-1-8ftn8.ondigitalocean.app/solanaFunds.
+ * 
+ * @param connection 
+ * @param owner 
+ * @returns 
+ */
+export const getFunds = async (
+  connection: Connection, 
+  owner: PublicKey
+): Promise<Fund[]> => {
   const investinClient = new InvestinClient(connection);
   const investments = await investinClient.getInvestmentsByInvestorAddress(owner);
   const prices = await investinClient.fetchAllTokenPrices();

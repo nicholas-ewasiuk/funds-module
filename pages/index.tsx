@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import type { NextPage } from 'next'
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
@@ -19,18 +19,26 @@ const Home: NextPage = () => {
   const { connection, network, setNetwork } = useSolana();
   const wallet = useConnectedWallet();
 
-  const refetchFunds = useCallback(async () => {
-    setNetwork('mainnet-beta');
-    console.log(network);
+  const refetchFunds = async () => {
     if (wallet) {
       const funds = await getFunds(connection, wallet.publicKey);
       setManagedFunds(funds);
     }
+  };
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      console.log(`fetching Investin data`);
+      refetchFunds();
+    }, 15000);
+
+    return () => clearInterval(timerId)
   }, [wallet]);
 
   useEffect(() => {
-    void refetchFunds();
-  }, [refetchFunds]);
+    setNetwork('mainnet-beta');
+    console.log(network);
+  }, []);
 
   return (
     <Layout>

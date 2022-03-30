@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Col, Collapse, Row } from 'antd';
+import { Col, Collapse, Row, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 import { BulbIcon } from './images/BulbIcon';
 import { ArrowIcon } from './images/ArrowIcon';
@@ -13,6 +14,9 @@ type Props = {
   keyProp: string
 }
 
+/**
+ * Displays managed funds data for the connected user. 
+ */
 export const ManagedFunds = ({ funds, keyProp }: Props) => {
 
   const calculateTotalBalance = (funds: Fund[] | undefined) => {
@@ -26,6 +30,7 @@ export const ManagedFunds = ({ funds, keyProp }: Props) => {
   };  
 
   const { Panel } = Collapse;
+  const loadIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   return (
     <Row>
@@ -45,9 +50,12 @@ export const ManagedFunds = ({ funds, keyProp }: Props) => {
                 <BulbIcon width={25}/>
               </div>
               <span>Managed Funds</span>
-              <span css={css`margin: auto 40px auto auto;`}>
-                {funds ? "$"+calculateTotalBalance(funds) : "-- "}
-              </span>
+              <div css={css`margin: auto 40px auto auto;`}>
+                { !funds && <Spin indicator={loadIcon} />}
+                <span>
+                  {funds ? "$"+calculateTotalBalance(funds) : "-- "}
+                </span>
+              </div>
               <div 
                 css={css`padding-top: 4px;`}
                 className='ant-collapse-arrow'
@@ -82,6 +90,9 @@ const StepCollapse = styled(Collapse)`
   .ant-collapse-item-active > div > div > .ant-collapse-arrow > svg {
     transform: scaleY(-1);
   }
+  .ant-spin {
+    color: #06D6A0;
+  }
 `;
 
 const table_header = css`
@@ -91,6 +102,11 @@ const table_header = css`
   height: 43.5px;
   background-color: #000;
   & > span {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  & > div > span {
+    margin-left: 10px;
     font-size: 22px;
     font-weight: bold;
   }

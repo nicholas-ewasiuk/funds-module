@@ -1,18 +1,19 @@
 /** @jsxImportSource @emotion/react */
+import type { NextPage } from 'next'
 import React, { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useConnectedWallet, useSolana } from '@saberhq/use-solana';
 import Layout, { Content, Header } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
+import { getFunds } from '../actions/getFunds';
 
-import { WalletButton } from './components/WalletButton';
-import { ManagedFunds } from './components/ManagedFunds';
-import { getFunds } from './actions/getFunds';
-import { Fund } from './helpers';
+import { WalletButton } from '../components/WalletButton';
+import { ManagedFunds } from '../components/ManagedFunds';
+import { Fund } from '../helpers';
 
 
-export const Body: React.FC = () => {
+const Home: NextPage = () => {
   const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
 
   const { connection, network, setNetwork } = useSolana();
@@ -54,6 +55,8 @@ export const Body: React.FC = () => {
   );
 };
 
+export default Home
+
 const StepContent = styled(Content)`
   position: relative;
   width: 100;
@@ -72,3 +75,5 @@ const StepHeader = styled(Header)`
   padding: 0 50px 0 50px;
   background-color: #000;
 `;
+
+

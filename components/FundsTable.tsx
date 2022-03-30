@@ -8,6 +8,7 @@ import { ColumnsType } from "antd/lib/table";
 import { PositionTools } from './PositionTools';
 import { TableData, TooltipData } from '../helpers';
 import images from '../assets/index';
+import Image from "next/image";
 
 type Props = {
   tableData: TableData[] | undefined
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
-  const [ columns, setColumns ] = useState<ColumnsType<TableData> | undefined>(undefined);
+  const [ columns, setColumns ] = useState<any | undefined>(undefined);
 
   useEffect(() => {
     if (tableData && tooltipDataArr) {
@@ -31,14 +32,13 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
                 align-items: flex-start;
               `}
             >
-              <img 
-                css={css`
-                  width: 28px;
-                  margin: 0 10px 0 0;
-                `}
+              <Image 
                 src={images.investin_logo}
+                alt="Investin"
+                width={28}
+                height={28}
               />
-              <span>{platform}</span>
+              <span css={css`margin-left: 7px;`}>{platform}</span>
             </div>
           )
         },
@@ -50,6 +50,9 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
             <a
               css={css`
                 color: #06D6A0;
+                &:hover {
+                  color: #07a87e;
+                }
               `}
               href={`https://sol.beta.investin.pro/fund-details/${fundName.address}`}
               target="_blank"

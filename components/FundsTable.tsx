@@ -8,6 +8,7 @@ import { ColumnsType } from "antd/lib/table";
 import { PositionTools } from './PositionTools';
 import { TableData, TooltipData } from '../helpers';
 import images from '../assets/index';
+import Image from "next/image";
 
 type Props = {
   tableData: TableData[] | undefined
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
-  const [ columns, setColumns ] = useState<ColumnsType<TableData> | undefined>(undefined);
+  const [ columns, setColumns ] = useState<any | undefined>(undefined);
 
   useEffect(() => {
     if (tableData && tooltipDataArr) {
@@ -31,12 +32,13 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
                 align-items: flex-start;
               `}
             >
-              <img 
+              <Image 
                 css={css`
                   width: 28px;
                   margin: 0 10px 0 0;
                 `}
                 src={images.investin_logo}
+                alt="I"
               />
               <span>{platform}</span>
             </div>

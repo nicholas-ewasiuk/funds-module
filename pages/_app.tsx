@@ -1,10 +1,9 @@
-import React from 'react';
+import '../styles/globals.css'
+import { FC } from 'react';
+import type { AppProps } from 'next/app'
 import { WalletKitProvider } from '@gokiprotocol/walletkit';
-import { Body } from './Body';
-import './app.less';
 
-
-const App: React.FC = () => {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <WalletKitProvider
       defaultNetwork='mainnet-beta'
@@ -12,9 +11,9 @@ const App: React.FC = () => {
         name: 'Managed Funds',
       }}
     >
-      <Body />
+      <Component />
     </WalletKitProvider>
   );
 };
 
-export default App;
+export default App

@@ -9,6 +9,10 @@ const lessFilePath = path.resolve(
 
 const securityHeaders = [
   {
+    key: 'x-custom-header',
+    value: 'my custom header value',
+  },
+  {
     key: 'Access-Control-Allow-Origin',
     value: '*'
   }
@@ -22,14 +26,19 @@ const nextConfig = {
     }
     return config;
   },
-  async headers() {
+  headers: async () => {
     return [
       {
-        source: '/solanaFunds',
-        headers: securityHeaders,
-      }
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'x-custom-header',
+            value: 'my custom header value',
+          },
+        ],
+      },
     ]
-  }
+  },
 }
 
 module.exports = withPlugins(

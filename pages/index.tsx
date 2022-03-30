@@ -11,6 +11,7 @@ import { getFunds } from '../actions/getFunds';
 import { WalletButton } from '../components/WalletButton';
 import { ManagedFunds } from '../components/ManagedFunds';
 import { Fund } from '../helpers';
+import { Network } from '@saberhq/solana-contrib';
 
 
 const Home: NextPage = () => {
@@ -40,7 +41,7 @@ const Home: NextPage = () => {
       name: "genesysgo",
       endpoint: "https://ssc-dao.genesysgo.net/"
     } as any);
-    setNetwork('genesysgo');
+    setNetwork('genesysgo' as Network);
     console.log(network);
   }, [wallet]);
 

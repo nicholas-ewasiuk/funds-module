@@ -3,8 +3,10 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
 import axios from "axios";
 import { Fund } from "../helpers";
+import { SolanaFunds } from "../helpers/solanaFunds";
 import { handleErrorAsync } from "../helpers/error";
 import { INVESTIN_API } from "../helpers/constants";
+
 
 
 interface Token {
@@ -29,6 +31,7 @@ const getTokenPrice = (
   return price;
 };
 
+
 const getFundData = async (url: string) => {
   return (await axios.get(url)).data;
 }
@@ -47,7 +50,9 @@ export const getFunds = async (
   const investinClient = new InvestinClient(connection);
   const investments = await investinClient.getInvestmentsByInvestorAddress(owner);
   const prices = await investinClient.fetchAllTokenPrices();
-  const fundData = await handleErrorAsync(getFundData, [INVESTIN_API]);
+  const fundData: any[] = SolanaFunds;
+  //const fundData = await handleErrorAsync(getFundData, [INVESTIN_API]); - Not using for now. Need to figure out CORS.
+
   
   const funds: Fund[] = investments
     .map((fund, index) => ({

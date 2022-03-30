@@ -30,7 +30,7 @@ const Home: NextPage = () => {
     const timerId = setInterval(() => {
       console.log(`fetching Investin data`);
       refetchFunds();
-    }, 15000);
+    }, 25000);
 
     return () => clearInterval(timerId)
   }, [wallet]);

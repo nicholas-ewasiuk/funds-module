@@ -55,7 +55,7 @@ export const getFunds = async (
             fund.fundAddress.slice(0,4) + "..." + fund.fundAddress.slice(-4),
           address: fund.fundAddress 
         },
-        performance: fund.currentPerformance.toFixed(2)+'%',
+        performance: ((fund.currentPerformance.valueOf()-1)*100).toFixed(2)+"%",
         value: fund.status === 'inActive' ? fund.amountInRouter.toString() : fund.currentReturns.toString(),
       },
       tooltipData: fund.tokens.map((t) => ({

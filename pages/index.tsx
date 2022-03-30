@@ -42,10 +42,11 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <Sider 
-        css={css`background-color: #000;`}
-        width={240}>
-      </Sider>
+      <StepSider 
+        width={240}
+        breakpoint='md'
+      >
+      </StepSider>
       <Layout>
         <StepHeader>
           <WalletButton 
@@ -65,6 +66,18 @@ const Home: NextPage = () => {
 
 export default Home
 
+const StepSider = styled(Sider)`
+  background-color: #000;
+`
+
+const StepHeader = styled(Header)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 50px 0 50px;
+  background-color: #000;
+`;
+
 const StepContent = styled(Content)`
   position: relative;
   width: 100;
@@ -75,13 +88,4 @@ const StepContent = styled(Content)`
     padding: 0px !important;
   }
 `;
-
-const StepHeader = styled(Header)`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding: 0 50px 0 50px;
-  background-color: #000;
-`;
-
 

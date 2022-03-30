@@ -89,15 +89,16 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
   }, [tableData, tooltipDataArr])
 
   return (
-    <StepTabs
+    <StepTable
       dataSource={tableData}
       columns={columns}
       pagination={false}
+      scroll={{x: 100}}
     />
   );
 };
 
-const StepTabs = styled(Table)`
+const StepTable = styled(Table)`
   .ant-table-content > table {
     border-collapse: separate;
     border-spacing: 0px 10px;

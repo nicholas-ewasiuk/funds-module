@@ -37,7 +37,12 @@ export const PositionTools = ({ tooltipDataArr, value, recordKey }: Props) => {
         />
       }
       <div>
-        <Button>
+        <Button 
+          css={css`
+            width: 64px;
+            padding: 3px;
+          `}
+        >
           Step in
         </Button>
         <Button 
@@ -46,6 +51,8 @@ export const PositionTools = ({ tooltipDataArr, value, recordKey }: Props) => {
             border-style: none;
             background-color: #3D3D3D;
             color: #B2B2B2;
+            width: 64px;
+            padding: 3px;
             &:hover {
               background-color: #B2B2B2;
               color: #000;

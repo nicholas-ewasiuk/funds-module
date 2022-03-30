@@ -20,7 +20,8 @@
     "bn.js": "^5.2.0",
     "next": "^12.1.2",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "sharp": "^0.30.3"
   },
   "devDependencies": {
     "@types/node": "17.0.23",

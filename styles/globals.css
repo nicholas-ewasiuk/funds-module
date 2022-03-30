@@ -1,6 +1,9 @@
 @import "~antd/dist/antd.dark.css";
-@import "https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css";
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css");
 
+@primary-color: #00f8b7;
+
+html,
 body {
   margin: 0;
   font-family: "Plus Jakarta Display", sans-serif;
@@ -16,6 +19,7 @@ body {
   border-style: none;
   background-color: #003628;
   color: #06D6A0;
+  font-family: "Plus Jakarta Display", sans-serif;
   span {
     font-size: 10px;
     font-weight: bolder;

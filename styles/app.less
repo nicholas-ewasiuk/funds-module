@@ -1,0 +1,39 @@
+@primary-color: #00f8b7;
+
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Display", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-row {
+  min-width: 100%;
+}
+
+.ant-btn {
+  border-style: none;
+  background-color: #003628;
+  color: #06D6A0;
+  span {
+    font-size: 10px;
+    font-weight: bolder;
+  }
+  &:hover {
+    background-color: #06D6A0;
+    color: #000;
+  }
+  &:focus {
+    background-color: #003628;
+    color: #06D6A0;
+    border-color: #06D6A0;
+  }
+}
+
+[ant-click-animating-without-extra-node]:after {
+  animation: none !important;
+}
+
+.ant-list-split .ant-list-item {
+  border: none;
+}

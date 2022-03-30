@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/app.less';
 import { FC } from 'react';
 import type { AppProps } from 'next/app'
 import { WalletKitProvider } from '@gokiprotocol/walletkit';

@@ -33,14 +33,12 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
               `}
             >
               <Image 
-                css={css`
-                  width: 28px;
-                  margin: 0 10px 0 0;
-                `}
                 src={images.investin_logo}
-                alt="I"
+                alt="Investin"
+                width={28}
+                height={28}
               />
-              <span>{platform}</span>
+              <span css={css`margin-left: 7px;`}>{platform}</span>
             </div>
           )
         },
@@ -52,6 +50,9 @@ export const FundsTable = ({ tableData, tooltipDataArr }: Props) => {
             <a
               css={css`
                 color: #06D6A0;
+                &:hover {
+                  color: #07a87e;
+                }
               `}
               href={`https://sol.beta.investin.pro/fund-details/${fundName.address}`}
               target="_blank"

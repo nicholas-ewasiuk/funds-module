@@ -7,6 +7,13 @@ const lessFilePath = path.resolve(
   "./styles/app.less"
 );
 
+const securityHeaders = [
+  {
+    key: 'Access-Control-Allow-Origin',
+    value: '*'
+  }
+];
+
 const nextConfig = {
   reactStrictMode: true,
   webpack: (config, { isServer }) => {
@@ -14,6 +21,14 @@ const nextConfig = {
       config.resolve.fallback.fs = false;
     }
     return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/solanaFunds',
+        headers: securityHeaders,
+      }
+    ]
   }
 }
 

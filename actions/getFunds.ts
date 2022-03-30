@@ -3,6 +3,8 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import BN from "bn.js";
 import axios from "axios";
 import { Fund } from "../helpers";
+import { handleErrorAsync } from "../helpers/error";
+import { INVESTIN_API } from "../helpers/constants";
 
 
 interface Token {
@@ -27,6 +29,10 @@ const getTokenPrice = (
   return price;
 };
 
+const getFundData = async (url: string) => {
+  return (await axios.get(url)).data;
+}
+
 /**
  * Retrieve's fund account data and maps it to Fund object. 
  * 
@@ -41,7 +47,7 @@ export const getFunds = async (
   const investinClient = new InvestinClient(connection);
   const investments = await investinClient.getInvestmentsByInvestorAddress(owner);
   const prices = await investinClient.fetchAllTokenPrices();
-  const fundData = (await axios.get("https://capitalfund-api-1-8ftn8.ondigitalocean.app/solanaFunds")).data;
+  const fundData = await handleErrorAsync(getFundData, [INVESTIN_API]);
   
   const funds: Fund[] = investments
     .map((fund, index) => ({

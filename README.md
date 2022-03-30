@@ -1,6 +1,6 @@
 # Managed Funds Module
 
-<img src="/src/assets/step-finance-01.png">
+<img src="/assets/step-finance-01.png">
 
 Investin integration component for Step Finance.
 

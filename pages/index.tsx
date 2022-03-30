@@ -16,7 +16,7 @@ import { Fund } from '../helpers';
 const Home: NextPage = () => {
   const [ managedFunds, setManagedFunds ] = useState<Fund[] | undefined>(undefined);
 
-  const { connection, network, setNetwork } = useSolana();
+  const { connection, network, setNetwork, setEndpoints } = useSolana();
   const wallet = useConnectedWallet();
 
   const refetchFunds = async () => {
@@ -36,9 +36,13 @@ const Home: NextPage = () => {
   }, [wallet]);
 
   useEffect(() => {
-    setNetwork('mainnet-beta');
+    setEndpoints({
+      name: "genesysgo",
+      endpoint: "https://ssc-dao.genesysgo.net/"
+    } as any);
+    setNetwork('genesysgo');
     console.log(network);
-  }, []);
+  }, [wallet]);
 
   return (
     <Layout>
